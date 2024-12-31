@@ -13,7 +13,6 @@ export const createProductController = async (req, res) => {
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
-    //alidation
     switch (true) {
       case !name:
         return res.status(500).send({ error: "Name is Required" });
@@ -52,7 +51,6 @@ export const createProductController = async (req, res) => {
   }
 };
 
-//get all products
 export const getProductController = async (req, res) => {
   try {
     const products = await productModel
@@ -77,7 +75,6 @@ export const getProductController = async (req, res) => {
   }
 };
 
-// get single product
 export const getSingleProductController = async (req, res) => {
   try {
     const product = await productModel
@@ -99,7 +96,6 @@ export const getSingleProductController = async (req, res) => {
   }
 };
 
-// get photo
 export const productPhotoController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid).select("photo");
@@ -117,7 +113,6 @@ export const productPhotoController = async (req, res) => {
   }
 };
 
-//delete controller
 export const deleteProductController = async (req, res) => {
   try {
     await productModel.findByIdAndDelete(req.params.pid).select("-photo");
@@ -135,13 +130,11 @@ export const deleteProductController = async (req, res) => {
   }
 };
 
-//upate producta
 export const updateProductController = async (req, res) => {
   try {
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
-    //alidation
     switch (true) {
       case !name:
         return res.status(500).send({ error: "Name is Required" });
@@ -184,8 +177,6 @@ export const updateProductController = async (req, res) => {
   }
 };
 
-
-// product count
 export const productCountController = async (req, res) => {
   try {
     const total = await productModel.find({}).estimatedDocumentCount();
@@ -203,7 +194,6 @@ export const productCountController = async (req, res) => {
   }
 };
 
-// product list base on page
 export const productListController = async (req, res) => {
   try {
     const perPage = 6;
@@ -228,19 +218,19 @@ export const productListController = async (req, res) => {
   }
 };
 
-// search product
 export const searchProductController = async (req, res) => {
   try {
     const { keyword } = req.params;
-    const resutls = await productModel
+    const results = await productModel
       .find({
         $or: [
           { name: { $regex: keyword, $options: "i" } },
           { description: { $regex: keyword, $options: "i" } },
+          { slug: { $regex: keyword, $options: "i" } },
         ],
       })
       .select("-photo");
-    res.json(resutls);
+    res.json(results);
   } catch (error) {
     console.log(error);
     res.status(400).send({
@@ -251,9 +241,6 @@ export const searchProductController = async (req, res) => {
   }
 };
 
-
-
-// get prdocyst by catgory
 export const productCategoryController = async (req, res) => {
   try {
     const category = await categoryModel.findOne({ slug: req.params.slug });
@@ -273,9 +260,6 @@ export const productCategoryController = async (req, res) => {
   }
 };
 
-
-
-//payment
 export const processPayment = async (req, res) => {
   try {
     const { nonce, cart } = req.body;
@@ -286,11 +270,11 @@ export const processPayment = async (req, res) => {
     const random = Math.floor(Math.random() * 1000).toString();
     const paymentResult = {
       id: random,
-      status: 'success',
+      status: "success",
       amount: total.toFixed(2),
     };
 
-    const processTransaction = async (error, paymentResult) => { // Removed paymentResult parameter here
+    const processTransaction = async (error, paymentResult) => {
       if (paymentResult) {
         try {
           const order = await new orderModel({
@@ -309,11 +293,11 @@ export const processPayment = async (req, res) => {
       }
     };
 
-    // Call the asynchronous function and pass error as null
     await processTransaction(null, paymentResult); // Pass paymentResult as the second argument
-
   } catch (error) {
     console.error("Error processing payment:", error);
-    res.status(500).json({ success: false, error: "Payment processing failed" });
+    res
+      .status(500)
+      .json({ success: false, error: "Payment processing failed" });
   }
 };

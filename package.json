@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node backend/index.js",
     "dev": "nodemon backend/index.js",
+    "front": "node project/index.html",
     "build": "npm install && npm install --prefix project && npm run build --prefix project"
   },
   "keywords": [],

@@ -14,28 +14,29 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const _dairname=path.resolve();
+const __dirname = path.resolve();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+    origin: "https://eccomerce-platfom.onrender.com",
+    optionsSuccessStatus: 200, 
   })
 );
 app.use(express.json());
 app.use(morgan("dev"));
 
+app.use(express.static(path.join(__dirname, 'project', 'public')));
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
+app.use(express.static(path.join(__dirname, "/project/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "project", "dist", "index.html"));
+});
 
 const PORT = process.env.PORT || 8000;
-
-app.use(express.static(path.join(_dairname,"/project/dist")))
-app.get("*",(req,res)=>{
-  res.sendFile(path.resolve(_dairname,"project","dist","index.html"));
-})
 
 app.listen(PORT, () => {
   console.log(

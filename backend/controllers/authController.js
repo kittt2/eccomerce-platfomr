@@ -64,18 +64,15 @@ import orderModel from "../models/orderModel.js";
 
 
 
-//POST LOGIN
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
-    //validation
     if (!email || !password) {
       return res.status(404).send({
         success: false,
         message: "Invalid email or password",
       });
     }
-    //check user
     const user = await userModel.findOne({ email });
     if (!user) {
       return res.status(404).send({
@@ -90,7 +87,6 @@ export const loginController = async (req, res) => {
         message: "Invalid Password",
       });
     }
-    //token
     const token = await JWT.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
@@ -132,9 +128,7 @@ export const forgotPasswordController = async (req, res) => {
     if (!answer) {
       res.status(400).send({ message: "answer is required" });
     }
-    //check
     const user = await userModel.findOne({ email, answer });
-    //validation
     if (!user) {
       return res.status(404).send({
         success: false,
@@ -157,10 +151,8 @@ export const forgotPasswordController = async (req, res) => {
   }
 };
 
-//test controller
 
 
-// test controller
 export const testController = (req, res) => {
   try {
     res.send("Protected Routes");
@@ -174,13 +166,11 @@ export const testController = (req, res) => {
 
 
 
-//update prfole
 export const updateProfileController = async (req, res) => {
   try {
     const { name, email, password, address, phone } = req.body;
     const user = await userModel.findById(req.user._id);
-    //password
-    if (password && password.length < 6) {
+    if (password && password.length < 3) {
       return res.json({ error: "Passsword is required and 6 character long" });
     }
     const hashedPassword = password ? await hashPassword(password) : undefined;
@@ -209,7 +199,7 @@ export const updateProfileController = async (req, res) => {
   }
 };
 
-//orders
+
 export const getOrdersController = async (req, res) => {
   try {
     const orders = await orderModel
@@ -226,7 +216,6 @@ export const getOrdersController = async (req, res) => {
     });
   }
 };
-//orders
 export const getAllOrdersController = async (req, res) => {
   try {
     const orders = await orderModel
@@ -245,7 +234,6 @@ export const getAllOrdersController = async (req, res) => {
   }
 };
 
-//order status
 export const orderStatusController = async (req, res) => {
   try {
     const { orderId } = req.params;
@@ -266,7 +254,6 @@ export const orderStatusController = async (req, res) => {
   }
 };
 
-//all users
 
 export const getallusers = async (req, res) => {
   try {
