@@ -27,10 +27,7 @@ const Orders = () => {
     if (auth?.token) getOrders();
   }, [auth?.token]);
    
-  <Helmet>
-  <title>User orders</title>
-  <meta name="description" content="Learn more about us" />
-</Helmet>
+
   return (
     <div className="container">
       <div>

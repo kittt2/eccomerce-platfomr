@@ -45,12 +45,12 @@ const Homepage = () => {
     },
   ];
 
-  <Helmet>
-    <title>Home</title>
-    <meta name="description" content="Learn more about us" />
-  </Helmet>;
   return (
     <div className="container  pt-4 ">
+      <Helmet>
+        <title>Home</title>
+        <meta name="description" content="Learn more about us" />
+      </Helmet>
       <div
         id="carouselExampleIndicators"
         style={{ height: "80vh" }}
@@ -125,7 +125,6 @@ const Homepage = () => {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-
       <section className="py-5 mt-5">
         <div className="container">
           <h2 className="text-center fw-bold fs-1 mb-4">Featured Products</h2>
@@ -165,7 +164,6 @@ const Homepage = () => {
           alt=""
         />
       </div>
-
       <section className="py-5">
         <div className="container">
           <h2 className="text-center mb-4 fs-1 fw-bold">Top Categories</h2>
@@ -194,7 +192,6 @@ const Homepage = () => {
           </div>
         </div>
       </section>
-
       <div className="conatiner text-center mb-5  text-capitalize">
         <div>
           <img

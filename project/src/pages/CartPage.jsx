@@ -18,7 +18,11 @@ const CartPage = () => {
 
   const handlePayment = async (event) => {
     event.preventDefault();
-    if (cvv.length !== 3 || cardNumber.length !== 16 || expirationDate.length !== 4) {
+    if (
+      cvv.length !== 3 ||
+      cardNumber.length !== 16 ||
+      expirationDate.length !== 4
+    ) {
       toast.error("Please fill in the correct details");
       return;
     } else {
@@ -30,7 +34,10 @@ const CartPage = () => {
       };
 
       try {
-        const response = await axios.post("/api/v1/product/process-payment", paymentData);
+        const response = await axios.post(
+          "/api/v1/product/process-payment",
+          paymentData
+        );
         setLoading(false);
         localStorage.removeItem("cart");
         setCart([]);
@@ -69,21 +76,29 @@ const CartPage = () => {
     }
   };
 
-  <Helmet>
-  <title>Cart</title>
-  <meta name="description" content="Learn more about us" />
-</Helmet>
-
   return (
     <div className="container my-4">
+      <Helmet>
+        <title>Cart</title>
+        <meta name="description" content="Learn more about us" />
+      </Helmet>
+
       <div>
-        <img src="/img/banner/b1.jpg" className="d-block w-100 rounded-5 my-4" alt="Banner" />
+        <img
+          src="/img/banner/b1.jpg"
+          className="d-block w-100 rounded-5 my-4"
+          alt="Banner"
+        />
       </div>
       <div className="text-center mb-4">
-        <h1 className="bg-light p-3 rounded">{!auth?.user ? "Hello User" : `Hello ${auth?.user?.name}`}</h1>
+        <h1 className="bg-light p-3 rounded">
+          {!auth?.user ? "Hello User" : `Hello ${auth?.user?.name}`}
+        </h1>
         <p className="fs-4">
           {cart?.length
-            ? `You have ${cart.length} items in your cart. ${auth?.token ? "" : "Please login to checkout!"}`
+            ? `You have ${cart.length} items in your cart. ${
+                auth?.token ? "" : "Please login to checkout!"
+              }`
             : "Your Cart is Empty"}
         </p>
       </div>
@@ -102,8 +117,12 @@ const CartPage = () => {
                 </div>
                 <div className="col-md-6 d-flex flex-column justify-content-center">
                   <h5 className="card-title text-dark">{p.name}</h5>
-                  <p className="card-text text-muted">{p.description.substring(0, 50)}...</p>
-                  <p className="card-text text-primary fw-bold">Price: ₹ {p.price}</p>
+                  <p className="card-text text-muted">
+                    {p.description.substring(0, 50)}...
+                  </p>
+                  <p className="card-text text-primary fw-bold">
+                    Price: ₹ {p.price}
+                  </p>
                 </div>
                 <div className="col-md-2 d-flex align-items-center justify-content-center">
                   <button
@@ -160,7 +179,9 @@ const CartPage = () => {
               <form onSubmit={handlePayment}>
                 <h4>Card Payment</h4>
                 <div className="mb-3">
-                  <label htmlFor="cardNumber" className="form-label">Card Number</label>
+                  <label htmlFor="cardNumber" className="form-label">
+                    Card Number
+                  </label>
                   <input
                     type="text"
                     id="cardNumber"
@@ -171,7 +192,9 @@ const CartPage = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="expirationDate" className="form-label">Expiration Date</label>
+                  <label htmlFor="expirationDate" className="form-label">
+                    Expiration Date
+                  </label>
                   <input
                     type="text"
                     id="expirationDate"
@@ -183,7 +206,9 @@ const CartPage = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="cvv" className="form-label">CVV</label>
+                  <label htmlFor="cvv" className="form-label">
+                    CVV
+                  </label>
                   <input
                     type="text"
                     id="cvv"

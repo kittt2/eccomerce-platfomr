@@ -46,10 +46,7 @@ const Profile = () => {
       toast.error("Something went wrong");
     }
   };
-  <Helmet>
-  <title>Profile</title>
-  <meta name="description" content="Learn more about us" />
-</Helmet>
+
 
   return (
     <div className="container ">

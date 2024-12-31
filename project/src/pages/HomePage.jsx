@@ -59,15 +59,15 @@ const HomePage = () => {
     }
   };
 
-  <Helmet>
-    <title>Shop</title>
-    <meta name="description" content="Learn more about us" />
-  </Helmet>;
-
   return (
     <>
+      <Helmet>
+        <title>Shop</title>
+        <meta name="description" content="Learn more about us" />
+      </Helmet>
+      
       <div
-        className="container py-5"
+        className="container py-4"
         style={products.length < 1 ? { height: "80vh" } : { height: "auto" }}
       >
         <img
