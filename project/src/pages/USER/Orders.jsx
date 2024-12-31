@@ -3,6 +3,7 @@ import UserMenu from "../../components/UserMenu";
 import axios from "axios";
 import moment from "moment";
 import { useauth } from "../../context/Context";
+import { Helmet } from "react-helmet";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -25,7 +26,11 @@ const Orders = () => {
   useEffect(() => {
     if (auth?.token) getOrders();
   }, [auth?.token]);
-
+   
+  <Helmet>
+  <title>User orders</title>
+  <meta name="description" content="Learn more about us" />
+</Helmet>
   return (
     <div className="container">
       <div>

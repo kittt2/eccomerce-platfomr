@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { AiFillWarning } from "react-icons/ai";
+import { Helmet } from "react-helmet";
 
 const CartPage = () => {
   const [auth, setAuth] = useauth();
@@ -67,6 +68,11 @@ const CartPage = () => {
       console.log(error);
     }
   };
+
+  <Helmet>
+  <title>Cart</title>
+  <meta name="description" content="Learn more about us" />
+</Helmet>
 
   return (
     <div className="container my-4">

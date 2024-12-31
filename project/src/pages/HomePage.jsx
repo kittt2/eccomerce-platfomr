@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { AiOutlineReload } from "react-icons/ai";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 import { useCart } from "../context/cart";
 import { BiCart } from "react-icons/bi";
 
 const HomePage = () => {
   const navigate = useNavigate();
-  
+
   const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -58,19 +59,27 @@ const HomePage = () => {
     }
   };
 
+  <Helmet>
+    <title>Shop</title>
+    <meta name="description" content="Learn more about us" />
+  </Helmet>;
+
   return (
     <>
-      <div className="container py-5"
-          style={products.length <1  ? { height: "80vh" } : { height: "auto" }}    
- 
-      > 
-
+      <div
+        className="container py-5"
+        style={products.length < 1 ? { height: "80vh" } : { height: "auto" }}
+      >
         <img
           src="/img/banner/b1.jpg"
           className="img-fluid rounded-5 mb-4"
           alt="Banner"
         />
-        {loading&& <div className="text-center container"><h1>please wait</h1></div> }
+        {loading && (
+          <div className="text-center container">
+            <h1>please wait</h1>
+          </div>
+        )}
         <div className="row">
           {products?.map((p) => (
             <div
@@ -78,7 +87,10 @@ const HomePage = () => {
               key={p._id}
               onClick={() => navigate(`/product/${p.slug}`)}
             >
-              <div style={{cursor:"pointer"}} className="card h-100 shadow-sm border-0 rounded-5">
+              <div
+                style={{ cursor: "pointer" }}
+                className="card h-100 shadow-sm border-0 rounded-5"
+              >
                 <img
                   src={`/api/v1/product/product-photo/${p._id}`}
                   className="card-img-top img-fluid rounded-top-5"
@@ -92,10 +104,9 @@ const HomePage = () => {
                   </p>
                   <p className="card-text text-black">₹ {p.price}</p>
                   <button
-                  style={{hover:"background-color"}}
+                    style={{ hover: "background-color" }}
                     className="btn btn-dark px-5  border-0 mt-2"
                     onClick={() => navigate(`/product/${p.slug}`)}
-
                   >
                     <BiCart className="h-100 fs-6" /> Buy
                   </button>

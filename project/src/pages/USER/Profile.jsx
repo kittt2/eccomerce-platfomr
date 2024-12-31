@@ -3,6 +3,7 @@ import UserMenu from "../../components/UserMenu";
 import { useauth } from "../../context/Context";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 
 const Profile = () => {
   const [auth, setAuth] = useauth();
@@ -45,6 +46,10 @@ const Profile = () => {
       toast.error("Something went wrong");
     }
   };
+  <Helmet>
+  <title>Profile</title>
+  <meta name="description" content="Learn more about us" />
+</Helmet>
 
   return (
     <div className="container ">

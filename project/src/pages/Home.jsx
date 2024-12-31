@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const Homepage = () => {
   const Navigate = useNavigate();
@@ -43,6 +44,11 @@ const Homepage = () => {
       type: "Seasonal collections",
     },
   ];
+
+  <Helmet>
+    <title>Home</title>
+    <meta name="description" content="Learn more about us" />
+  </Helmet>;
   return (
     <div className="container  pt-4 ">
       <div
