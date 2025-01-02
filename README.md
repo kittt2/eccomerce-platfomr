@@ -1,4 +1,4 @@
-# eCommerce Platform
+# Eccommerce Platform
 
 Welcome to my eCommerce platform! This project features a comprehensive eCommerce solution with both admin and user dashboards.
 
@@ -50,4 +50,12 @@ Check out the live site here: [My eCommerce Platform](https://eccomerce-platfom.
    ```bash
    git clone https://github.com/your-username/ecommerce-platform.git
 
-2.
+2.install dependencies:
+     ```bash
+     npm i
+3. run server :
+      ```bash
+      npm run dev
+      
+
+
