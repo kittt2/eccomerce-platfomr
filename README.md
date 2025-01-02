@@ -48,7 +48,7 @@ Check out the live site here: [My eCommerce Platform](https://eccomerce-platfom.
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/ecommerce-platform.git
+   git clone https://github.com/kittt2/eccomerce-platfomr.git
 
 2. Install dependencies:
 
