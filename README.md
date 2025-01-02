@@ -56,10 +56,10 @@ Check out the live site here: [My eCommerce Platform](https://eccomerce-platfom.
     npm install
 
 ## add the .env file
-PORT=""
-MONGO_URL=""
-DEV_MODE=""
-JWT_SECRET=""
+     PORT=""
+     MONGO_URL=""
+     DEV_MODE=""
+     JWT_SECRET=""
 
 3. run server
    ```bash
