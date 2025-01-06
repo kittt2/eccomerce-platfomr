@@ -18,7 +18,7 @@ const __dirname = path.resolve();
 
 app.use(
   cors({
-    origin: "https://eccomerce-platfom.onrender.com",
+origin: ["https://eccomerce-platfom.onrender.com", "https://nitinproject01.netlify.app"],    
     optionsSuccessStatus: 200, 
   })
 );
